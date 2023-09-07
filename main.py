@@ -311,7 +311,7 @@ import random
 # 4. Turite žodyną, kuriame yra vardai ir amžius.
 # Parašykite programą, kuri peržiūri žodyną ir išrenka tik tas poras, kuriose amžius yra didesnis arba lygus 18.
 # Rezultatus patalpinkite naujame žodyne
-
+#
 # asmenys ={
 #      'Rasa': 46,
 #      'Daiva': 30,
@@ -347,3 +347,127 @@ import random
 #     print(f"Pavadinimas: {prekes_info['pavadinimas']}, Kaina: {prekes_info['kaina']}")
 # print(f"Bendra kaina: {Krepselio_suma}")
 
+# 2023-09-07 pamokos darbai:
+#
+# 1. Sukurkite sąrašą temperatūros su temperatūromis.
+# Patikrinkite kiekvieną temperatūrą sąraše ir išveskite "šilta" (jei temperatūra virš 20) arba "šalta"
+# (jei temperatūra 20 ar mažiau)
+
+# temperaturos = [10, -7, 25, 36]
+#
+# for temperatura in temperaturos:
+#      if temperatura >20:
+#           print('silta')
+#      elif temperatura <20:
+#           print('salta')
+
+# 2. Turite žodyną su studentų vardais ir jų pažymiais. Parašykite "for" ciklą,
+# kuris išveda kiekvieno studento vardą ir jo pažymį.
+
+# studentai = {
+#      'Jonas': 9,
+#      'Migle': 6,
+#      'Eugenijus': 10,
+#      'Tomas' : 4
+#  }
+#
+# studentas = {}
+# for vardas, pazymys in studentai.items():
+#     studentas [vardas] = pazymys
+# print(f'Studentai ir ju pazymiai: {studentai}')
+
+# asmenys_naujas = {}
+# for vardas, amzius in asmenys.items():
+#     if amzius >= 18:
+#         asmenys_naujas[vardas] = amzius
+
+# 3. Sukurkite tuščią sąrašą sarasas ir leiskite vartotojui įvesti skaičius.
+# Naudojant "while" ciklą, pridėkite kiekvieną įvestą skaičių prie sąrašo. Ciklą nutraukite, kai vartotojas įveda 0.
+# NEBAIGTA
+
+# vardai = ['Jonas', 'Petras', 'Marius', 'Laura', 'Laura']
+#
+# pirmas_vardas = vardai.pop(2)
+# print(pirmas_vardas)
+# #
+# vardai.insert(1,'Giedrius')
+# print (vardai)
+#
+# vardai.append('Onute')
+# print (vardai)
+
+# vardai.sort (reverse=True)
+# print(vardai)
+
+# vardai.remove('Laura')
+# print(vardai)
+
+# vaisiai = ('obuolys', 'kriause', 'bananas', 'braske')
+
+# touple virsuje reiksmes nekeiciamos
+
+# vaisia1 = ['obuolys', 'kriause', 'bananas', 'braske']
+
+# liste virsuje galima keisti reiksmes
+#
+# vaisiai = {
+#     'obuolys',
+#     'kriause'
+#     'bananas'
+#     'braske'
+# }
+#
+# vaisiai2 = vaisiai[0]
+# print(vaisiai2)
+#
+# # sitas leidzia grazinti is saraso 0 reiksme
+#
+# skaiciai = (3.14, 2.71)
+#
+# a,b = skaiciai
+# print(a)
+# print(b)
+
+# vaisiai = ['obuolys', 'kriause', 'bananas', 'braske']
+#
+# for sarasas, vaisius in enumerate(vaisiai, start=0):
+#     print(f"{sarasas}. {vaisius}")
+
+# Zemiau sukuriame nauja faila su tekstu:
+
+# with open("failo_pav.txt", 'w', encoding='utf-8') as file:
+#     content = file.write("Kuriame nauja faila")
+
+# with open("failo_pav.txt", 'a', encoding='utf-8') as file:
+#     content = file.write("\nPapildomas tekstas")
+#     print (content)
+
+# with open("failo_pav.txt", 'w', encoding='utf-8') as file:
+#     content = file.write("Kuriame nauja faila")
+
+# Zemiau abu pavyzdziai nuskaito sukurta faila
+
+# with open("failo_pav.txt", 'r', encoding='utf-8') as file:
+#     content = file.read()
+#     print (content)
+#
+# with open("failo_pav.txt", 'r', encoding='utf-8') as file:
+#     for eilute in file:
+#         print(eilute.strip())
+
+# vaisiai = []
+#
+# with open("vaisiai.txt", 'w', encoding='utf-8') as file:
+#     content = file.write('obuolys, \nkriause, \nbananas, \nbraske')
+
+studentai = {
+     'Jonas': 9,
+     'Migle': 6,
+     'Eugenijus': 10,
+     'Tomas' : 4
+ }
+
+studentas = {}
+for vardas, pazymys in studentai.items():
+    studentas [vardas] = pazymys
+print(f'Studentai ir ju pazymiai: {studentai}')
