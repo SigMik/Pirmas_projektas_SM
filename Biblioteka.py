@@ -656,12 +656,12 @@ import pandas as pd
 # 2023-09-21 pamokos darbai:
 
 # df = pd.read_csv('prekybos_duomenys.csv')
-# print(df.head(5))
+# # print(df.head(5))
 # df['Data'] = pd.to_datetime(df['Data'])
 # df['Metai'] = df['Data'].dt.year
 # df['Mėnuo'] = df['Data'].dt.month
 # df['Diena'] = df['Data'].dt.day
-# print(f'\n', df)
+# # print(f'\n', df)
 # pagal_produkta = df.groupby(['Mėnuo','Produktas']) ['Pardavimai'].sum()
 # products = df['Produktas']
 # result = pd.DataFrame(columns=['Produktas', 'Metai', 'Mėnuo', 'Sumazejimas'])
@@ -706,7 +706,7 @@ import pandas as pd
 # auto_pgl_gamintoja = df['Markė'].value_counts()
 #
 # print(auto_pgl_gamintoja)
-#
+# #
 # # plt.plot(auto_pgl_gamintoja, label='linija', color='blue', linestyle ='--', marker = 'o')
 # # plt.xlabel('Markė')
 # # plt.ylabel('Pagaminti automobiliai')
@@ -719,6 +719,650 @@ import pandas as pd
 # plt.ylabel('Pagamintas kiekis')
 # plt.title('Pagaminti kiekiai pagal markę')
 # plt.show()
+
+
+
+# 2023-09-22 pamokos medziaga numpy biblioteka:
+
+import numpy as np
+import random
+# masyvas =np.array([1,2,3,4,5,])
+# masyvas2=np.array([6,2,9,4,7])
+#
+# suma=np.sum(masyvas)
+# vidurkis=np.mean(masyvas)
+#
+# mediana=np.median(masyvas)
+# st_dev = np.std(masyvas)
+# min=np.min(masyvas)
+#
+# print(f'Suma: {suma}')
+# print(f'Vidurkis: {vidurkis}')
+# print(f'Mediana: {mediana}')
+# print(f'Nuokrypis: {st_dev}')
+# print(f'Minimumas: {min}')
+#
+# suma2 = masyvas+masyvas2
+# print(suma2)
+
+# Matricos sukūrimas:
+
+# matrica =np.array([[1,2,3], [4,5,6], [7,8,9]])
+# print(matrica)
+# suma = np.sum(matrica)
+# print(f'Matricos suma: {suma}')
+
+# matrica = np.random.randint(1,11,(4,4))
+# print(matrica)
+# vidurkis=np.mean(matrica)
+# print(vidurkis)
+# vidurkis_pagal_stulpelius = np.mean(matrica, axis=0) #axis 0 yra stulpelis, 1 -eilute
+# print(vidurkis_pagal_stulpelius)
+
+# studentų_pazymiai = np.array([[7, 8, 9], [6, 4, 10], [10, 9, 10], [8, 8, 7]])
+# student7_vidurkiai = np.mean(studentų_pazymiai, axis = 1).round(2)
+# medianos = np.median(studentų_pazymiai, axis=1)
+# print(student7_vidurkiai, medianos)
+# for i in range(len(student7_vidurkiai)):
+#     print(f'studentas {i+1}: vidurkis {student7_vidurkiai[i]}, mediana {medianos[i]}')
+
+
+# print(f'Studentu vidurkis: {vidurkis}')
+# print(f'Studentu medianos: {medianos}')
+
+# masyvas33 = np.random.randint(1,51,(1,1))
+# maksis = np.argmax(masyvas33)
+# min=np.argmin(masyvas33)
+# # print(maksis)
+# print(masyvas33, '\n', min)
+
+# masyvas = np.array([1, 2, 3, 4, 5])
+# daugiau_uz_tris = masyvas[masyvas > 3]
+# print(daugiau_uz_tris)
+
+# for i in range(1,11):
+#     print(i)
+
+# 2023-09-22 Bandymas istraukti duomenis is kripto tinklapio.
+
+from bs4 import BeautifulSoup
+import requests
+import pandas as pd
+import psycopg2
+# import time()
+
+#
+# url = 'https://coinmarketcap.com'
+# response = requests.get(url)
+# print(response.status_code)
+#
+# soup = BeautifulSoup(response.text, 'html.parser')
+# # print(soup.prettify())
+# table=soup.find("table", class_='sc-b28ea1c6-3 izgIsg cmc-table')
+#
+# antrastes = table.find_all('th')
+#
+# antrasciu_pavadinimai =[]
+#
+# for i in antrastes:
+#     pavadinimas = i.text
+#     antrasciu_pavadinimai.append(pavadinimas)
+#     # print(antrasciu_pavadinimai)
+# # print(antrastes)
+#
+# df=pd.DataFrame(columns=antrasciu_pavadinimai[2:7])
+# df=pd.DataFrame(columns=['Name', 'Price', '1h%', '7h%', '7d%'])
+# print(df)
+#
+# rows = table.find_all('tr')
+# # print(row)
+# for i in rows[1:11]:
+#     data=i.find_all('td')
+#     # print(data)
+#     row=[tr.text for tr in data]
+#     # print(row[2:7])
+#     l=len(df)
+#     df.loc[l]=row[2:7]
+# print(df)
+# df.to_csv('criptocurrency.csv')
+
+# Paskaičiuokite vidutines, minimalias ir maksimalias kainas, taip pat kitas statistikos vertes.
+
+# df=pd.read_csv('criptocurrency.csv')
+# data=pd.DataFrame(df)
+# print(data)
+# min_cripto_kaina=data['Price'].min()
+# print(f'Žemiausia cripto kaina: {min_cripto_kaina}')
+#
+# max_cripto_kaina=data['Price'].max()
+# print(f'Didžiausia cripto kaina: {max_cripto_kaina}')
+
+# data['Price'] =data['Price'].str.replace('$', '').str.replace(',', '').astype(float)
+# print(data)
+
+# vid_cripto_kaina = data['Price'].mean().round(2)
+# print(f'Vidutinė cripto kaina $ valiuta: {vid_cripto_kaina}')
+
+
+# # Sukurkite linijinį grafiką, kuris atvaizduoja kriptovaliutos kainos kitimą laike (x ašis - laikas, y ašis - kaina).
+# # NEPAVYKSTA.
+#
+# x = data['Name']
+# y = data['Price']
+# z = data['1h%']
+# f = data['7h%']
+# g = data['7d%']
+#
+# print(data)
+# cripto_valiutos = df['Name']
+# cripto_kainos = df['Price']
+# # for valiuta in cripto_valiutos:
+# #     df['Name']=valiuta
+# #     for kaina in cripto_kainos:
+# #         df['Price']=kaina
+# #     result=valiuta+kaina
+# #     print(result)
+# for valiuta, kaina in zip(cripto_valiutos,cripto_kainos):
+#     result = valiuta+kaina
+#     print(result)
+# plt.plot(result['Produktas'], result['Sumazejimas'], label='linija', color='blue', linestyle ='--', marker = 'o')
+# plt.xticks(rotation=90)
+# plt.legend()
+# plt.xlabel('Mėnesiai')
+# plt.ylabel('sumažėjimas')
+# plt.title('Pardavimų mažėjimas')
+# plt.show()
+
+# 2023-09-25 pamoka. Biblioteka numpy tęsinys:
+
+# masyvas = np.arange(1,11)
+# print(masyvas)
+#
+# sum=np.sum(masyvas)
+# # print(sum)
+#
+# dvimatis_masyvas=masyvas.reshape(5,2)
+# print(dvimatis_masyvas)
+#
+# # lyginius skaicius pavesrti i nuli
+# masyvas[masyvas%2==0]==0
+# # print(masyvas)
+#
+# x_masyvas=masyvas[masyvas>5]
+# print(x_masyvas)
+
+# masyvas = np.random.randint(1,101,(5,5))
+# print(masyvas)
+
+# max_masyvas = np.max(masyvas)
+# print(max_masyvas)
+
+# min_masyvas=np.min(masyvas)
+# print(min_masyvas)
+
+# apsukti eilutes reiksmes nuo galo
+# kintamasis=np.flipud(masyvas)
+# print(kintamasis)
+
+# stulpelis = masyvas[:,::-1]
+# print(stulpelis)
+
+# apsuka is left i right
+# stulpelis = np.fliplr(masyvas)
+# print(stulpelis)
+
+# sujungti du masyvus i viena horizontaliai
+
+# masyvas = np.random.randint(1,10,10)
+# masyvas2 = np.arange(1,50,5)
+# print(masyvas, '\n', masyvas2)
+# print(masyvas)
+# print(masyvas2)
+
+# masyvas_isskirtas = np.split(masyvas,5)
+# print(masyvas_isskirtas)
+#
+# masyvas3=np.hstack((masyvas,masyvas2))
+# print(masyvas3)
+#
+# masyvas4=np.split(masyvas3, 4)
+# print(masyvas4)
+
+# 2023-09-25 pamokos uzduotys:
+# [!] Sukurkite masyvą nuo 0 iki 9 ir jį pertvarkykite į 3x3 masyvą;
+
+# masyvas = np.arange(1,10)
+# print(masyvas)
+#
+# trimatis_masyvas=masyvas.reshape(3,3)
+# print(trimatis_masyvas)
+
+# [!] Sukurkite 5x5 masyvą su atsitiktinėmis reikšmėmis ir raskite vidurkį kiekvieno stulpelio;
+
+# masyvas = np.random.randint(1,256,(5,5))
+# print(masyvas)
+# vidurkis_pagal_stulpelius = np.mean(masyvas, axis=0)
+# print(vidurkis_pagal_stulpelius)
+
+# [!] Sukurkite 6x6 masyvą su skaičiais nuo 1 iki 36 ir transformuokite jį į 2D masyvą (matricą) 3x12;
+# masyvas=np.arange(1,37)
+# print(masyvas)
+# masyvas6_6=masyvas.reshape(6,6)
+# print(masyvas6_6)
+# masyvas_transformuotas = np.reshape(masyvas, (3,12))
+# print(f'Transformuotas masyvas:')
+# print(masyvas_transformuotas)
+
+# [!] Sukurkite masyvą su atsitiktinėmis reikšmėmis nuo 0 iki 1 ir raskite jo visų elementų vidurkį.
+# Toliau paverskite mažesnes reikšmes į 0 ir didesnes į 1.
+#
+# masyvas = np.random.randint(0,2,(4,4))
+# print(masyvas)
+# vidurkis_pagal_elementus = np.mean(masyvas, axis=1)
+# print(vidurkis_pagal_elementus)
+# naujas_masyvas=vidurkis_pagal_elementus
+
+# naujas_masyvas[naujas_masyvas>=0.5]=1,[naujas_masyvas<0.5]=0
+# print(naujas_masyvas)
+
+# [!] Sukurkite du masyvus pirmas_masyvas ir antras_masyvas,
+# kiekvieną su 5 atsitiktinėmis reikšmėmis nuo 1 iki 10, ir sudėkite juos taip,
+# kad naujas masyvas turėtų visų reikšmių kvadratus.
+
+# masyvas = np.random.randint(1,11,5)
+# masyvas1 = np.random.randint(1,11,5)
+# print(masyvas)
+# print(masyvas1)
+# abu_masyvai = np.hstack((masyvas,masyvas1))
+# print(abu_masyvai)
+# abu_masyvai = abu_masyvai**2
+# print(abu_masyvai)
+
+# [!] Sukurkite 2D masyvą (matricą) 5x5 su atsitiktinėmis reikšmėmis nuo 1 iki 10. Raskite eilutes, kuriose yra bent du skaičiai didesni nei 5.
+
+# masyvas11 = np.random.randint(1, 11, (5, 5))
+# print('\n ', masyvas11)
+# eilute = masyvas11[(masyvas11 > 5).sum(axis = 1) >=2]
+# print('\n ', eilute)
+
+# 2023-09-26 pamoka:
+# seaborn biblioteka
+import seaborn as sns
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+# stulpeline i virsu
+# df = pd.DataFrame({'category':['a', 'b', 'a', 'b'], 'reiksme':[1,2,3,4,]})
+# sns.barplot(data=df, x='category', y = 'reiksme')
+# plt.show()
+
+# linijine
+# df = pd.DataFrame({'category':['a', 'b', 'a', 'b'], 'reiksme':[1,2,3,4,]})
+# sns.lineplot(data=df, x='category', y = 'reiksme')
+# plt.show()
+
+# stupeline pagal reiksmes
+# df = pd.DataFrame({'category':['a', 'b', 'a', 'b'], 'reiksme':[1,2,3,4,]})
+# sns.countplot(data=df, x='category')
+# sns.countplot(data=df, y='reiksme')
+# plt.show()
+
+# juostine
+# df = pd.DataFrame({'category':['a', 'b', 'a', 'b'], 'reiksme':[1,2,3,4,]})
+# sns.boxplot(data=df, x='category', y = 'reiksme')
+# plt.show()
+
+# daugialype diagrama
+# df = pd.DataFrame({'category':[2,4,6,8], 'reiksme':[1,2,3,4,]})
+# sns.pairplot(df)
+# plt.show()
+
+# regresijos diagrama
+# df = pd.DataFrame({'category':[2,4,6,8], 'reiksme':[1,2,3,4,]})
+# sns.lmplot(data=df, x='category', y='reiksme')
+# plt.show()
+
+# silumine diagrama
+# df2 = np.random.rand(5,5)
+# sns.heatmap(df2)
+# plt.show()
+
+# silumine diagrama (yra 'tips, 'diamond', 'car_crashes')
+# df2 = np.random.rand(5,5)
+# data=sns.load_dataset('tips')
+# sns.histplot(data=data, x='total_bill',kde=True)
+# data=data.columns
+# print(data)
+# plt.show()
+
+# sekantis pavyzdys su car crashe
+
+# data2=sns.load_dataset('car_crashes')
+# spederiai=data2['total'].mean()
+# print(spederiai)
+#
+# plt.figure(figsize=(8,6))
+# sns.boxenplot(data2, x='total')
+# plt.show()
+
+# sekantis su dataset 'exercise'
+
+# data3=sns.load_dataset('exercise')
+# print(data3.head())
+# # pagal dieta
+# sns.pairplot(data=data3,hue='diet')
+# plt.show()
+
+# linijini plot piesiam
+# data4=sns.load_dataset('flights')
+# sns.lineplot(data=data4, x='year', y='passengers', hue='month')
+# plt.show()
+
+# 2023-09-26 pamokos uzduotys:
+# [!] Naudojant "tips" duomenų rinkinį iš Seaborn, apskaičiuokite vidutinį sąskaitos sumos (total_bill) dydį
+# ir vidutinį gauto mėnesinio mokesčio (tip) dydį;
+
+# data5=sns.load_dataset('tips')
+# # print(data5)
+# vid_saskaitos_suma=data5['total_bill'].mean()
+# print(vid_saskaitos_suma)
+# vid_tip_dydis = data5['tip'].mean()
+# print(vid_tip_dydis)
+# sns.lineplot(data=data5, x='total_bill', y='tip')
+# plt.show()
+
+# [!] Naudojant "diamonds" duomenų rinkinį iš Seaborn, suskaičiuokite
+# ir atvaizduokite vidutinį kainos (price) dydį pagal kiekvieną pjovimo (cut) grupę;
+
+# data6=sns.load_dataset('diamonds')
+# # print(data6)
+# vid_kaina = data6['price'].mean()
+# print(vid_kaina)
+# pjovimo_grupes=data6['cut']
+# print(pjovimo_grupes)
+# #
+# sns.barplot(data=data6, x='cut', y = 'price')
+# plt.title('Vidutinės kainos pagal deimantų grupę')
+# plt.xlabel('Pjovimo grupė')
+# plt.ylabel('Vidutinė kaina')
+# plt.show()
+
+# [!] Panaudokite "tips" duomenų rinkinį, grupuokite duomenis pagal dienos dalį (time),
+# apskaičiuokite vidutinį sąskaitos sumos (total_bill) dydį kiekvienoje dienos dalyje
+# ir sukurkite kreivės grafiką, kuri vaizduoja vidutines sąskaitos sumas pagal dienos dalį;
+
+# data7=sns.load_dataset('tips')
+# datatime = data7['time']
+# print(datatime)
+# vid_sask_suma=data7['total_bill'].mean()
+# print(vid_sask_suma)
+#
+# sns.lmplot(data=data7, x='time', y='total_bill')
+# plt.title('Vidutinė sąskaitos suma pagal dienos dalį')
+# plt.xlabel('Laiko grupė')
+# plt.ylabel('Vidutinė suma')
+# plt.show()
+
+
+# [!] Įkelkite "titanic" duomenų rinkinį iš Seaborn. Grupuokite duomenis pagal lytį (sex) ir klasę (class),
+# tada suskaičiuokite kiekvienos grupės išgyvenusiųjų skaičių.
+# Tada sukurkite stulpelinę diagramą, kuri vaizduoja išgyvenusiųjų skaičių pagal lytį ir klasę;
+# duomenys = sns.load_dataset("titanic")
+
+# Grupuojame duomenis pagal lytį ir klasę ir suskaičiuojame išgyvenusiųjų skaičių
+# duomenys=sns.load_dataset('titanic')
+# grupuoti_duomenys = duomenys.groupby(["sex", "class"])["survived"].sum().reset_index()
+#
+# # Sukuriame stulpelinę diagramą
+# plt.figure(figsize=(10, 6))
+# sns.barplot(data=grupuoti_duomenys, x="class", y="survived", hue="sex")
+# plt.title("Išgyvenusiųjų skaičius pagal lytį ir klasę")
+# plt.xlabel("Klasė")
+# plt.ylabel("Išgyvenusiųjų skaičius")
+# plt.show()
+
+# data_1 = sns.load_dataset('diamonds')
+# print(data_1)
+# df = pd.DataFrame(data_1)
+# vidutinis_pagal_cut = df.groupby('cut')['price'].mean()
+# print(vidutinis_pagal_cut)
+# plt.figure(figsize=(12,5))
+# sns.barplot(x=vidutinis_pagal_cut.values, y=vidutinis_pagal_cut.index
+#             )
+# plt.title('Vidutins kainos dydis pagal pjovimo grupe')
+# plt.xlabel('Diamonds cut')
+# plt.ylabel('Vidutine kaina')
+# plt.show()
+
+# 2023-09-27 pamoka: PANASIAI KAIP BAIGIAMASIS DARBAS
+
+# url = 'https://vaga.lt/grozine-literatura'
+# response = requests.get(url)
+# print(response.status_code)
+#
+# soup = BeautifulSoup(response.content, 'html.parser')
+# # print(soup)
+#
+# conteineris = soup.find_all('div', class_='product-item-container')
+# # print(conteineris)
+#
+# knygu_sarasas = []
+#
+# for knygos in conteineris:
+#     pavadinimas = knygos.find('p', class_='name').text.strip()
+#     kaina=float(knygos.find('div', class_='price price-align-wrapper'). text.strip('€').replace(',', '.'))
+#     autorius = knygos.find('p', class_='Autorius').text.strip()
+#     knygu_sarasas.append((pavadinimas, kaina, autorius))
+#
+# df=pd.DataFrame(knygu_sarasas, columns=['Pavadinimas', 'Kaina', 'Autorius'])
+# # print(df)
+#
+# max = np.max(df['Kaina'])
+# min = np.min(df['Kaina'])
+# vidurkis = np.mean(df['Kaina'])
+# mediana = np.median(df['Kaina'])
+# print(f' Kainų Statistika: \n Max kaina: {max},\n Minimumas: {min}, \n Vidurkis: {vidurkis}, \n Mediana:{mediana}')
+#
+# sns.set(style='darkgrid')
+# sns.histplot(data=df, x='Kaina', kde=True)
+# plt.ylabel('Knygu skaicius')
+# plt.show()
+
+# Savarankiska uzduotis:
+# filmu_sarasas = []
+# #
+# headers = {
+#     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/117.0.0.0 Safari/537.36'
+# }
+# for i in range(1,4):
+#     url = f'https://www.metacritic.com/browse/movie/?releaseYearMin=1910&releaseYearMax=2023&page={i}'
+#     page = requests.get(url, headers=headers)
+#     # print(page.status_code)
+#
+#     soup = BeautifulSoup(page.content, 'html.parser')
+# # print(soup)
+#
+#     filmu_konteineris = soup.find_all('div', class_='c-finderProductCard')
+# # print(filmu_konteineris)
+#
+#     for filmai in filmu_konteineris:
+#         pavadinimas = filmai.find('div', class_='c-finderProductCard_title').text.strip().replace('(re-release)', ' ')
+#         metascore = filmai.find('div', class_='c-siteReviewScore_background c-finderProductCard_metascoreValue u-flexbox-alignCenter g-height-100 g-outer-spacing-right-xsmall c-siteReviewScore_background-critic_xsmall').text.strip()
+#         filmu_sarasas.append((pavadinimas, metascore))
+#
+# df=pd.DataFrame(filmu_sarasas, columns=['Pavadinimas', 'Metascore'])
+# print(df)
+#
+# df.to_csv('filmai_su_metascore.csv')
+#
+# sns.set(style='darkgrid')
+# sns.histplot(data=df, x='Metascore', kde=True)
+# plt.xlabel('Metascore rezultatas')
+# plt.ylabel('Filmų skaičius pagal Metascore')
+# plt.title('Filmų kiekis pagal Metascore įvertinimą')
+# plt.show()
+
+# 2023-09-28 pamoka:
+
+import pandas as pd
+import seaborn as sns
+from bs4 import BeautifulSoup
+import requests
+import psycopg2
+import numpy as np
+import matplotlib.pyplot as plt
+import openpyxl
+#
+#
+# def create_and_insert_product():
+#     connection = psycopg2.connect(
+#         host="localhost",
+#         port=5432,
+#         database="ButaiProducts",
+#         user="postgres",
+#         password="Dekingumas123*"
+#     )
+#     cursor = connection.cursor()
+#     create_table_query = """
+#                 CREATE TABLE IF NOT EXISTS butai (
+#                 id SERIAL PRIMARY KEY,
+#                 Adresas VARCHAR(255),
+#                 Kambariu_sk INT,
+#                 Plotas DECIMAL(10,2),
+#                 Aukstas VARCHAR(255),
+#                 Kaina INT,
+#                 Kv_kaina DECIMAL(10,2)
+#                 )
+#                 """
+#
+#     cursor.execute(create_table_query)
+#     print('Table created successfully')
+#
+#     Butu_sarasas = []
+
+#     for i in range(1, 6):
+#         url = f'https://www.aruodas.lt/atviru-duru-dienos/puslapis/{i}/'
+#         response = requests.get(url)
+#         # print(response.content)
+#         soup = BeautifulSoup(response.content, 'html.parser')
+#         blokas = soup.find_all('div', class_='list-row-v2 object-row opendoor advert')
+#
+#         for butas in blokas:
+#             Adresas = soup.select_one('div.list-adress-v2 h3').text.strip()
+#             Kambariu_sk = butas.find('div', class_='list-RoomNum-v2 list-detail-v2').text.strip()
+#             Plotas = butas.find('div', class_='list-AreaOverall-v2 list-detail-v2').text.strip()
+#             Aukstas = butas.find('div', class_='list-Floors-v2 list-detail-v2').text.strip()
+#             Kaina = butas.find('span', class_='list-item-price-v2').text.strip('€').replace(' ', '')
+#             Kv_kaina = butas.find('span', class_='price-pm-v2').text.strip().replace('€/m²', '').replace(' ',
+#                                                                                                          '').replace(
+#                 ',', '.')
+#             if Kambariu_sk == '' or Plotas == '' or Kaina == '' or Kv_kaina == '':
+#                 continue
+#             Kambariu_sk = int(Kambariu_sk)
+#             Plotas = float(Plotas)
+#             Kaina = int(Kaina)
+#             Kv_kaina = float(Kv_kaina)
+#
+#             Butu_sarasas.append((Adresas, Kambariu_sk, Plotas, Aukstas, Kaina, Kv_kaina))
+#             # print(Butu_sarasas)
+#     df = pd.DataFrame(Butu_sarasas, columns=['Adresas', 'Kambarius_sk', 'Plotas', 'Aukstas', 'Kaina', 'Kv_kaina'])
+#     print(df)
+#     df.to_csv('Butai.csv')
+#
+#     insert_query = "INSERT INTO butai (Adresas, Kambariu_sk, Plotas, Aukstas, Kaina, Kv_kaina) VALUES(%s, %s,%s,%s,%s,%s)"
+#
+#     cursor.executemany(insert_query, Butu_sarasas)
+#     print(f'Products inserted into list succesfully!')
+#     connection.commit()
+#
+#     cursor.close()
+#     # connection.close()
+#
+#
+# if __name__ == '__main__':
+#     create_and_insert_product()
+
+
+# 2023-09-29 pamoka:
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.datasets import load_iris
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
+
+# 1 uzduotis:
+
+# iris = load_iris()
+# data=pd.DataFrame(data=iris.data,columns=iris.feature_names)
+# data=data.columns
+# # print(data)
+#
+# # seed atlieka, kad random duomenys nesikeistu
+# np.random.seed(0)
+# X=np.random.randn(200,2)
+# y=(X[:,0]+X[:,1]>0).astype(int)
+# X_train, X_test = X[:150], X[150:]
+# y_train, y_test = y[:150], y[150:]
+#
+# svm_classifier=SVC(kernel='linear', C = 1)
+#
+# svm_classifier.fit(X_train, y_train)
+# y_pred = svm_classifier.predict(X_test)
+# accuracy=accuracy_score(y_test,y_pred)
+# print(f'accurancy {accuracy:.2f}')
+# # .2f yra tas pats, kas round(2), t.y. du skaiciai po kablelio
+#
+# xx,yy=np.meshgrid(np.linspace(X[:,0].min() -1, X[:,0].max() +1,100 ),
+#                               np.linspace(X[:,0].min() -1, X[:,0].max()+1,100 ))
+# Z = svm_classifier.decision_function(np.c_[xx.ravel(),yy.ravel()])
+# Z=Z.reshape(xx.shape)
+#
+# plt.contourf(xx,yy,Z, levels=[-1,0,1],alpha = 0.6, colors = ['red','blue'])
+# plt.scatter(X[:,0], X[:,1],c=y, cmap=plt.cm.brg, edgecolors='k')
+# plt.xlabel('feature1')
+# plt.ylabel('feature2')
+# plt.title('Sprendimų ribos vizualizacija')
+# plt.show()
+
+# 2 uzduotis:
+
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error
+
+# X=np.random.rand(100,1)*10
+# y=3*X+np.random.randn(100,1)
+# X_train, X_test,y_train, y_test= train_test_split(X,y, test_size=0.2, random_state=42)
+# regresor = LinearRegression()
+# regresor.fit(X_train,y_train)
+# forcast = regresor.predict(X_test)
+# Vid_kv_nuokrypis=mean_squared_error(y_test, forcast)
+# print(Vid_kv_nuokrypis)
+# plt.scatter(X_test,y_test, color='blue', label='actual')
+# plt.plot(X_test, forcast, color='red', label = 'predicted')
+# plt.xlabel('X')
+# plt.ylabel('y')
+# plt.title('Linijinė regresija(actual vs predicted)')
+# plt.legend()
+# plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
